@@ -42,7 +42,7 @@ const CreatePoint = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        WhatsApp: '',
+        whatsapp: '',
     })
 
     useEffect(() => {
@@ -116,7 +116,7 @@ const CreatePoint = () => {
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         
-        const {name, email, WhatsApp} = formData;
+        const {name, email, whatsapp} = formData;
         const uf = selectedUf;
         const city = selectedCity;
         const [latitude, longitude] = selectedPosition;
@@ -125,7 +125,7 @@ const CreatePoint = () => {
         const data = {
             name,
             email,
-            WhatsApp,
+            whatsapp,
             uf,
             city,
             latitude,
@@ -166,8 +166,8 @@ const CreatePoint = () => {
                     </div>
 
                     <div className="field">
-                        <label htmlFor="WhatsApp">WhatsApp</label>
-                        <input type="text" name="WhatsApp" id="WhatsApp" onChange={handleInputChange}/>
+                        <label htmlFor="whatsapp">whatsapp</label>
+                        <input type="text" name="whatsapp" id="whatsapp" onChange={handleInputChange}/>
                     </div>
                         
 
