@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Constants from 'expo-constants'
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, Alert } from 'react-native'
 import {Feather as Icon} from '@expo/vector-icons'
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation, useRoute} from '@react-navigation/native'
 import MapView, { Marker } from 'react-native-maps'
 import { SvgUri } from 'react-native-svg'
 import * as Location from 'expo-location';
@@ -22,8 +22,12 @@ interface Point {
     longitude: number;  
 }
 
+
+
 const Detail = () => {
     const navigation = useNavigation();
+    
+
     const [items, setItems] = useState<Item[]>([]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0])
@@ -71,8 +75,8 @@ const Detail = () => {
         navigation.goBack();
     }
 
-    function handleNavigateToDetail() {
-        navigation.navigate('Detail')
+    function handleNavigateToDetail(id: number) {
+        navigation.navigate('Detail', { id: id })
     }
 
     function handleSelectItem(id: number) {
@@ -111,7 +115,7 @@ const Detail = () => {
                         {points.map(point => (
                             <Marker 
                                 key={String(point.id)}
-                                onPress={handleNavigateToDetail}
+                                onPress={() => handleNavigateToDetail(point.id)}
                                 style={styles.mapMarker}
                                 coordinate={{
                                     latitude: point.latitude,
