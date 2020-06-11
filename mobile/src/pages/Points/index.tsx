@@ -22,11 +22,17 @@ interface Point {
     longitude: number;  
 }
 
+interface Params {
+    uf: string;
+    city: string;
+}
+
 
 
 const Detail = () => {
     const navigation = useNavigation();
-    
+    const route = useRoute()
+    const routeParams = route.params as Params;
 
     const [items, setItems] = useState<Item[]>([]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -36,7 +42,7 @@ const Detail = () => {
 
     useEffect(() => {
         api.get('items').then(response => {
-            setItems(response.data)
+            setItems(response.data)            
         })
     }, []);
 
@@ -62,14 +68,15 @@ const Detail = () => {
     useEffect(() => {
         api.get('points', {
             params: {
-                city: 'Vitória',
-                uf: 'ES',
-                items: [1, 2]
+                city: routeParams.city,
+                uf: routeParams.uf,
+                items: selectedItems,
             }
         }).then(response => {
             setPoints(response.data)
+            console.log(response.data)
         })
-    }, []);
+    }, [selectedItems]);
 
     function handleNavigateBack() {
         navigation.goBack();
