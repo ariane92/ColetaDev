@@ -15,11 +15,11 @@ interface Item {
 }
 
 interface Point {
-    id: number
-    name: string
-    image: string
-    latitude: number
-    longitude: number    
+    id: number;
+    name: string;
+    image: string;
+    latitude: number;
+    longitude: number;  
 }
 
 const Detail = () => {
@@ -60,12 +60,12 @@ const Detail = () => {
             params: {
                 city: 'Vitória',
                 uf: 'ES',
-                items: [6]
+                items: [1, 2]
             }
         }).then(response => {
             setPoints(response.data)
         })
-    }, [])
+    }, []);
 
     function handleNavigateBack() {
         navigation.goBack();
@@ -100,14 +100,14 @@ const Detail = () => {
                 <View style={styles.mapContainer}>
                     { initialPosition[0] !== 0 && (
                         <MapView 
-                        style={styles.map} 
-                        initialRegion={{
-                            latitude: initialPosition[0],
-                            longitude: initialPosition[1],
-                            latitudeDelta: 0.050,
-                            longitudeDelta: 0.050,
-                        }}
-                    >
+                            style={styles.map} 
+                            initialRegion={{
+                                latitude: initialPosition[0],
+                                longitude: initialPosition[1],
+                                latitudeDelta: 0.050,
+                                longitudeDelta: 0.050,
+                            }}
+                        >
                         {points.map(point => (
                             <Marker 
                                 key={String(point.id)}
